@@ -45,7 +45,7 @@ export default function Home() {
    const fetchProjects = async () => {
      setLoading(true)
      try {
-       const response = await axios.get("http://localhost:8080/api/") // Fetching from your API endpoint
+       const response = await axios.get("https://halu-db.vercel.app/api/") // Fetching from your API endpoint
        setProjects(response.data) // Set the fetched data into state
      } catch (error) {
        console.error("Error fetching projects:", error)
