@@ -1,4 +1,4 @@
-// components/project-list.tsx
+
 "use client"
 
 import { useState, useMemo } from "react"
@@ -46,7 +46,7 @@ export default function ProjectList({ initialProjects }: { initialProjects: Proj
       result = result.filter(
         (project) =>
           project.name.toLowerCase().includes(searchLower) ||
-          project.about.toLowerCase().includes(searchLower) ||
+          project.description.toLowerCase().includes(searchLower) ||
           project.backers.toLowerCase().includes(searchLower),
       )
     }
