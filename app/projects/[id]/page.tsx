@@ -97,12 +97,12 @@ export default function AirdropDetails() {
             </div>
             <div className="space-y-1">
               <div className="flex items-center gap-3">
-                {airdrop.isNew && (
-                  <span className="inline-flex items-center rounded-full bg-red-500/10 px-2 py-1 text-xs font-medium text-red-500 ring-1 ring-inset ring-red-500/20">
-                    New
-                  </span>
-                )}
-                <h1 className="text-2xl md:text-3xl font-bold tracking-tight">{airdrop.name}</h1>
+                <h1 className="text-2xl md:text-3xl font-bold tracking-tight flex items-center gap-2">
+                  {airdrop.name}
+                  {airdrop.isNew && (
+                    <span className="text-red-500 text-xs font-semibold align-top">NEW</span>
+                  )}
+                </h1>
               </div>
               <p className="text-lg text-muted-foreground">{airdrop.description}</p>
             </div>
@@ -133,8 +133,7 @@ export default function AirdropDetails() {
                 <div>
                   <dt className="text-sm text-muted-foreground mb-1">Chain</dt>
                   <dd>
-                    <Badge
-                      variant="secondary">
+                    <Badge variant="secondary">
                       {airdrop.chain || "Unknown"}
                     </Badge>
                   </dd>
