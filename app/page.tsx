@@ -252,103 +252,131 @@ export default function Home() {
         </div>
       </div>
 
-     {/* Table Section */}
-     <div className="container py-6">
-        <div className="rounded-lg border bg-card overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b">
-                  <th className="text-left p-4 font-medium">
-                    <button onClick={() => handleSort("name")} className="flex items-center gap-1 hover:text-primary">
-                      Project
-                      <SortIndicator columnKey="name" />
-                    </button>
-                  </th>
-                  <th className="text-left p-4 font-medium hidden md:table-cell">
-                    <button onClick={() => handleSort("about")} className="flex items-center gap-1 hover:text-primary">
-                      About
-                      <SortIndicator columnKey="about" />
-                    </button>
-                  </th>
-                  <th className="text-left p-4 font-medium">
-                    <button onClick={() => handleSort("chain")} className="flex items-center gap-1 hover:text-primary">
-                      Chain
-                      <SortIndicator columnKey="chain" />
-                    </button>
-                  </th>
-                  <th className="text-left p-4 font-medium">
-                    <button onClick={() => handleSort("cost")} className="flex items-center gap-1 hover:text-primary">
-                      Cost
-                      <SortIndicator columnKey="cost" />
-                    </button>
-                  </th>
-                  <th className="text-left p-4 font-medium hidden lg:table-cell">
-                    <button
-                      onClick={() => handleSort("backers")}
-                      className="flex items-center gap-1 hover:text-primary"
-                    >
-                      Backers
-                      <SortIndicator columnKey="backers" />
-                    </button>
-                  </th>
-                  <th className="text-left p-4 font-medium">
-                    <button onClick={() => handleSort("stage")} className="flex items-center gap-1 hover:text-primary">
-                      Stage
-                      <SortIndicator columnKey="stage" />
-                    </button>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredAndSortedProjects.map((project, index) => (
-                  <tr
-                    key={project.id}
-                    className={`${
-                      index % 2 === 0 ? "bg-muted/50" : ""
-                    } hover:bg-accent/50 transition-colors cursor-pointer`}
-                    onClick={() => router.push(`/projects/${project.id}`)}
-                  >
-                    <td className="p-4">
-                      <div className="flex items-center gap-3">
-                        <Image
-                          src={project.image}
-                          alt={project.name}
-                          width={24}
-                          height={24}
-                          className="rounded-full"
-                        />
-                        <span className="font-medium">{project.name}</span>
-                      </div>
-                    </td>
-                    <td className="p-4 text-muted-foreground hidden md:table-cell">{project.description}</td>
-                    <td className="p-4">
-                      <Badge
-                        variant="secondary">
-                        {project.chain}
-                      </Badge>
-                    </td>
-                    <td className="p-4">
-                      <Badge variant="secondary" className={`bg-${COSTS.find((c) => c.name === project.cost)?.color}`}>
-                        {project.cost}
-                      </Badge>
-                    </td>
-                    <td className="p-4 text-muted-foreground hidden lg:table-cell">{project.backers}</td>
-                    <td className="p-4">
-                      <Badge
-                        variant="secondary"
-                        className={project.stage === "Mainnet" ? "bg-emerald-600" : "bg-yellow-600"}
-                      >
-                        {project.stage}
-                      </Badge>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+    {/* Responsive Section */}
+<div className="container py-6">
+  {/* Card Layout for Mobile */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:hidden gap-6">
+    {filteredAndSortedProjects.map((project) => (
+      <div
+        key={project.id}
+        className="border rounded-lg p-4 bg-card shadow-md hover:shadow-lg transition-all cursor-pointer"
+        onClick={() => router.push(`/projects/${project.id}`)}
+      >
+        <div className="flex items-center gap-4">
+          <Image
+            src={project.image}
+            alt={project.name}
+            width={48}
+            height={48}
+            className="rounded-full"
+          />
+          <div className="flex flex-col">
+            <span className="font-medium text-lg">{project.name}</span>
+            <span className="text-sm text-muted-foreground">{project.description}</span>
           </div>
         </div>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Badge variant="secondary">{project.chain}</Badge>
+          <Badge variant="secondary">{project.cost}</Badge>
+          <Badge variant="secondary" className={project.stage === "Mainnet" ? "bg-emerald-600" : "bg-yellow-600"}>
+            {project.stage}
+          </Badge>
+        </div>
       </div>
+    ))}
+  </div>
+
+  {/* Table Layout for Desktop */}
+  <div className="hidden md:block rounded-lg border bg-card overflow-hidden">
+    <div className="overflow-x-auto">
+      <table className="w-full">
+        <thead>
+          <tr className="border-b">
+            <th className="text-left p-4 font-medium">
+              <button onClick={() => handleSort("name")} className="flex items-center gap-1 hover:text-primary">
+                Project
+                <SortIndicator columnKey="name" />
+              </button>
+            </th>
+            <th className="text-left p-4 font-medium hidden md:table-cell">
+              <button onClick={() => handleSort("about")} className="flex items-center gap-1 hover:text-primary">
+                About
+                <SortIndicator columnKey="about" />
+              </button>
+            </th>
+            <th className="text-left p-4 font-medium">
+              <button onClick={() => handleSort("chain")} className="flex items-center gap-1 hover:text-primary">
+                Chain
+                <SortIndicator columnKey="chain" />
+              </button>
+            </th>
+            <th className="text-left p-4 font-medium">
+              <button onClick={() => handleSort("cost")} className="flex items-center gap-1 hover:text-primary">
+                Cost
+                <SortIndicator columnKey="cost" />
+              </button>
+            </th>
+            <th className="text-left p-4 font-medium hidden lg:table-cell">
+              <button
+                onClick={() => handleSort("backers")}
+                className="flex items-center gap-1 hover:text-primary"
+              >
+                Backers
+                <SortIndicator columnKey="backers" />
+              </button>
+            </th>
+            <th className="text-left p-4 font-medium">
+              <button onClick={() => handleSort("stage")} className="flex items-center gap-1 hover:text-primary">
+                Stage
+                <SortIndicator columnKey="stage" />
+              </button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredAndSortedProjects.map((project, index) => (
+            <tr
+              key={project.id}
+              className={`${
+                index % 2 === 0 ? "bg-muted/50" : ""
+              } hover:bg-accent/50 transition-colors cursor-pointer`}
+              onClick={() => router.push(`/projects/${project.id}`)}
+            >
+              <td className="p-4">
+                <div className="flex items-center gap-3">
+                  <Image
+                    src={project.image}
+                    alt={project.name}
+                    width={24}
+                    height={24}
+                    className="rounded-full"
+                  />
+                  <span className="font-medium">{project.name}</span>
+                </div>
+              </td>
+              <td className="p-4 text-muted-foreground hidden md:table-cell">{project.description}</td>
+              <td className="p-4">
+                <Badge variant="secondary">{project.chain}</Badge>
+              </td>
+              <td className="p-4">
+                <Badge variant="secondary" className={`bg-${COSTS.find((c) => c.name === project.cost)?.color}`}>
+                  {project.cost}
+                </Badge>
+              </td>
+              <td className="p-4 text-muted-foreground hidden lg:table-cell">{project.backers}</td>
+              <td className="p-4">
+                <Badge variant="secondary" className={project.stage === "Mainnet" ? "bg-emerald-600" : "bg-yellow-600"}>
+                  {project.stage}
+                </Badge>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 
       <SiteFooter />
     </div>
