@@ -30,7 +30,7 @@ export default function AirdropDetails() {
     const fetchAirdrop = async () => {
       try {
         const startTime = Date.now();
-        const res = await fetch(`http://localhost:8080/api/${id}`);
+        const res = await fetch(`https://halu-db.vercel.app/api/${id}`);
 
         if (!res.ok) {
           if (res.status === 404) {
