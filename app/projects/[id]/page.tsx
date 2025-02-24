@@ -97,12 +97,12 @@ export default function AirdropDetails() {
             </div>
             <div className="space-y-1">
               <div className="flex items-center gap-3">
-                <h1 className="text-2xl md:text-3xl font-bold tracking-tight flex items-center gap-2">
-                  {airdrop.name}
-                  {airdrop.isNew && (
-                    <span className="text-red-500 text-xs font-semibold align-top">NEW</span>
-                  )}
-                </h1>
+                <div className="flex items-center gap-3">
+  <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
+    {airdrop.name}
+    {airdrop.isNew ? <span className="ml-2 text-red-500 text-sm">NEW</span> : null}
+  </h1>
+</div>
               </div>
               <p className="text-lg text-muted-foreground">{airdrop.description}</p>
             </div>
