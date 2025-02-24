@@ -1,3 +1,5 @@
+// backend/models/Airdrop.js
+
 const db = require("../db");
 
 class Airdrop {

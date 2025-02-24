@@ -1,3 +1,5 @@
+// backend/routes/api.js
+
 const express = require("express");
 const router = express.Router();
 const db = require("../db"); // Ensure db.js is properly configured
